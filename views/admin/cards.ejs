@@ -1,0 +1,47 @@
+<%- include("navbar.ejs") %>
+
+<!-- Services Section -->
+<section id="services" class="services py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Our Services</h2>
+            <p class="">We provide expert medical care for children with a compassionate approach.</p>
+        </div>
+
+        <div class="row">
+            <% services.forEach(function(service, index) { %>
+                <div class="col-md-4 col-sm-6 mb-4" data-aos="zoom-in" data-aos-delay="<%= index * 200 %>">
+                    <div class="card h-100">
+                        <img src="/admin_assets/<%= service.image1 %>" alt="<%= service.title1 %>" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= service.title1 %></h5>
+                            <p class="card-text"><%= service.description1 %></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 mb-4" data-aos="zoom-in" data-aos-delay="<%= index * 400 %>">
+                    <div class="card h-100">
+                        <img src="/admin_assets/<%= service.image2 %>" alt="<%= service.title2 %>" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= service.title2 %></h5>
+                            <p class="card-text"><%= service.description2 %></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 mb-4" data-aos="zoom-in" data-aos-delay="<%= index * 600 %>">
+                    <div class="card h-100">
+                        <img src="/admin_assets/<%= service.image3 %>" alt="<%= service.title3 %>" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= service.title3 %></h5>
+                            <p class="card-text"><%= service.description3 %></p>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<%- include("footer.ejs") %>

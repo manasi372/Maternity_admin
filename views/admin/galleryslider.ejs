@@ -1,0 +1,108 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .form-container, .table-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .img-thumbnail { width: 100px; height: 100px; border-radius: 5px; object-fit: cover; }
+        .table td { vertical-align: middle; text-align: center; }
+        .action-btns { display: flex; gap: 5px; justify-content: center; align-items: center; }
+        .btn-sm { font-size: 14px; padding: 6px 6px; height: 40px; min-width: 85px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Gallery Form -->
+    <div class="form-container">
+        <h2 class="text-center mb-4 text-primary">Add Gallery Item</h2>
+        <form action="/admin/save_gallery" method="POST" enctype="multipart/form-data">
+            
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label class="form-label">Upload Image</label>
+                <input type="file" name="image" class="form-control">
+            </div>
+
+            <!-- Gallery Heading -->
+            <div class="mb-3">
+                <label class="form-label">Gallery Heading</label>
+                <input type="text" name="gallery_heading" class="form-control" placeholder="Enter Gallery Heading">
+            </div>
+
+            <!-- Gallery Info -->
+            <div class="mb-3">
+                <label class="form-label">Gallery Information</label>
+                <textarea name="gallery_info" class="form-control" rows="3" placeholder="Enter Gallery Information"></textarea>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Gallery List -->
+    <div class="table-container">
+        <h4 class="text-primary text-center">Gallery List</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Gallery Heading</th>
+                        <th>Gallery Information</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (gallery.length > 0) { %>
+                        <% gallery.forEach((row, i) => { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td>
+                                    <% if (row.image) { %>
+                                        <img src="/admin_assets/<%= row.image %>" class="img-thumbnail">
+                                    <% } else { %>
+                                        <span>No Image</span>
+                                    <% } %>
+                                </td>
+                                <td><%= row.gallery_heading %></td>
+                                <td><%= row.gallery_info %></td>
+                                <td class="action-btns">
+                                    <a href="/admin/edit_gallery/<%= row.gallery_id  %>" class="btn btn-warning btn-sm">✏ Edit</a>
+                                    <a href="/admin/delete_gallery/<%= row.gallery_id  %>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm">🗑 Delete</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5" class="text-center">No gallery items found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

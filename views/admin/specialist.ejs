@@ -1,0 +1,95 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specialist Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f4f4; }
+        .container { max-width: 70%; }
+        .form-box, .table-box {
+            background: white; padding: 20px; border-radius: 8px;
+            box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        .img-thumbnail { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <!-- Add Specialist Form -->
+    <div class="form-box">
+        <h5 class="text-primary text-center">Add Specialist</h5>
+        <form action="/admin/save_specialist" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Specialist Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Specialization</label>
+                <input type="text" name="specialty" class="form-control" placeholder="Enter Specialization" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Specialist Image</label>
+                <input type="file" name="photo" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save Specialist</button>
+        </form>
+    </div>
+
+    <!-- Specialist List -->
+    <div class="table-box mt-4">
+        <h6 class="text-primary text-center">Specialist List</h6>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Specialization</th>
+                        <th>Actions</th>   
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (specialist.length > 0) { %>
+                        <% specialist.forEach((row, i) => { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td>
+                                    <% if (row.photo) { %>  
+                                        <img src="/admin_assets/<%= row.photo %>" class="img-thumbnail">
+                                    <% } %>
+                                </td>
+                                <td><%= row.name %></td>
+                                <td><%= row.specialty %></td>
+                                <td>
+                                    <!-- ✅ Edit Button -->
+                                     <a href="/admin/edit_specialist/<%= row.specialist_id %>">
+                                        <button class="btn btn-warning btn-sm">✏ Edit</button>
+                                    </a>
+                                    
+                                    <a href="/admin/delete_specialist/<%= row.specialist_id %>" onclick="return confirm('Are you sure?');">
+                                        <button class="btn btn-danger btn-sm">🗑 Delete</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No records found.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

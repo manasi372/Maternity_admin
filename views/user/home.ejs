@@ -1,0 +1,962 @@
+<%-include("navbar.ejs")%>
+
+
+<style>
+    
+  /* Ensure Full Height for Slider */
+.hospital-slider .carousel-item {
+    height: 85vh; /* Adjust height as needed */
+    min-height: 500px; /* Prevent collapse */
+}
+
+/* Remove Extra Margins/Padding */
+.hospital-slider {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Ensure Body & Parent Containers Fit Properly */
+body, html {
+    overflow-x: hidden;
+}
+
+.hospital-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hospital-slider .carousel-caption {
+    background: hsla(240, 1%, 15%, 0.502);
+    padding: 20px;
+    border-radius: 8px;
+    color: hwb(240 89% 8%);
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    text-align: left;
+}
+.hospital-slider .carousel-caption h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+.hospital-slider .carousel-caption p {
+    font-size: 20px;
+}
+.hospital-slider .btn-primary {
+    background-color: #002f6c;;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 6px;
+}
+.hospital-slider .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Carousel Controls */
+.hospital-slider .carousel-control-prev-icon,
+.hospital-slider .carousel-control-next-icon {
+    filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+    .hospital-slider .carousel-item {
+        height: 60vh; /* Reduce height on smaller screens */
+    }
+
+    .hospital-slider .carousel-caption {
+        top: 20%;
+        left: 5%;
+        padding: 15px;
+    }
+
+    .hospital-slider .carousel-caption h1 {
+        font-size: 32px;
+    }
+
+    .hospital-slider .carousel-caption p {
+        font-size: 16px;
+    }
+
+    .hospital-slider .btn-primary {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+
+/* aboucss */
+ /* General Styles */
+ .about-section {
+    background-color: #f8fbff;
+    padding: 50px 0;
+    overflow: hidden;
+}
+
+/* Image Animation */
+.about-image img {
+    border-radius: 10px;
+    width: 90%;
+
+    animation: fadeInLeft 1.2s ease-out;
+}
+
+/* Content Animation */
+.about-content {
+    padding: 20px;
+    animation: fadeInRight 1.5s ease-out;
+    opacity: 0;
+    transform: translateX(50px);
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+}
+
+/* Badge Animation */
+.badge {
+    background-color: #eef2ff;
+    color: #2b4eff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+/* Title Animation */
+.about-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #092c4c;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.8s;
+}
+
+/* Description Animation */
+.about-description {
+    color: #546e7a;
+    font-size: 16px;
+    margin: 15px 0;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 1s;
+}
+
+/* List Animation */
+.about-list {
+    list-style: none;
+    padding: 0;
+}
+.about-list li {
+    font-size: 16px;
+    color: #092c4c;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+}
+.about-list li:nth-child(1) { animation-delay: 1.2s; }
+.about-list li:nth-child(2) { animation-delay: 1.4s; }
+.about-list li:nth-child(3) { animation-delay: 1.6s; }
+.about-list li:nth-child(4) { animation-delay: 1.8s; }
+.about-list li:nth-child(5) { animation-delay: 2s; }
+.about-list li:nth-child(6) { animation-delay: 2.2s; }
+.about-list li:nth-child(7) { animation-delay: 2.4s; }
+
+.about-list li i {
+    color: #2b4eff;
+    margin-right: 10px;
+}
+
+/* Button Animation */
+.btn-know-more {
+    background-color: #2b4eff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: bounceIn 1.5s ease-out forwards;
+    animation-delay: 2.5s;
+}
+
+.btn-know-more:hover {
+    background-color: #1f3ecc;
+    transform: scale(1.05);
+}
+
+/* Initially hide elements */
+.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-in-out;
+}
+
+/* When element is visible, animate it */
+.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Keyframe Animations */
+@keyframes fadeInLeft {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-section {
+        text-align: center;
+    }
+    .about-image {
+        margin-bottom: 20px;
+    }
+    .about-content {
+        animation: fadeInUp 1.5s ease-out;
+    }
+}
+
+
+
+
+
+/* services */
+.facilities-section {
+    background-color: #e8f1fb; /* Light Blue Background */
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.facility-box {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.facility-box:hover {
+    transform: translateY(-5px);
+}
+
+.facility-box img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.facility-box h4 {
+    font-size: 1.2rem;
+    margin-top: 15px;
+    color: #333;
+}
+
+.facility-box p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #217dbb;
+}
+
+
+/* ourdrcss */
+ /* General Styling */
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f1fb;
+    margin: 0;
+    padding: 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #002f6c;
+    text-align: center;
+}
+
+/* Doctor Slider Wrapper */
+.doctor-slider-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+/* Doctor Slider */
+.doctor-slider {
+    display: flex;
+    gap: 30px;
+    animation: scroll 25s linear infinite;
+}
+
+/* Doctor Card */
+.doctor-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    min-width: 300px;
+    max-width: 300px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Doctor Image Container */
+.doctor-img-container {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.doctor-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Doctor Title */
+.doctor-title {
+    background: rgba(0, 47, 108, 0.85);
+    color: white;
+    padding: 15px 0;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+/* Infinite Scroll Animation */
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .doctor-slider {
+        animation-duration: 30s;
+    }
+
+    .doctor-card {
+        min-width: 280px;
+        max-width: 280px;
+    }
+
+    .doctor-img-container {
+        height: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .doctor-slider {
+        animation-duration: 35s;
+        gap: 20px;
+    }
+
+    .doctor-card {
+        min-width: 260px;
+        max-width: 260px;
+        padding: 15px;
+    }
+
+    .doctor-img-container {
+        height: 250px;
+    }
+
+    .doctor-title {
+        font-size: 1rem;
+    }
+}
+
+/* workingprocesscss */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+.stats-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    background-color:  #e8f1fb; /* Change color as per your theme */
+    color: white;
+}
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 80%;
+    max-width: 1200px;
+}
+.stat-card {
+    background: white;
+    color: #02457A;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 220px;
+    text-align: center;
+    margin: 15px;
+    transition: transform 0.3s;
+}
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+.stat-card i {
+    font-size: 40px;
+    color: #002f6c; /* Adjust icon color */
+    margin-bottom: 10px;
+}
+.stat-number {
+    font-size: 35px;
+    font-weight: bold;
+}
+.stat-title {
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    .stats-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* contactusform */
+
+/* contactuscode */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f9ff;
+}
+.contact-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #e8f1fb;
+    padding: 50px 10px;
+}
+.container-fluid {
+    display: flex;
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.contact-image {
+    width: 50%;
+}
+.contact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.form-container {
+    width: 50%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.badge {
+    display: inline-block;
+    background: #002f6c;
+    color: #fff;
+    padding-top:5px;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 35px;
+ }
+.form-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #002f6c;
+    margin: 20px 0;
+}
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.btn-submit {
+    background: #002f6c;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.btn-submit i {
+    margin-left: 5px;
+}
+.btn-submit:hover {
+    background: #004bb5;
+}
+@media (max-width: 768px) {
+    .container-fluid {
+        flex-direction: column;
+    }
+    .contact-image, .form-container {
+        width: 100%;
+    }
+}
+
+ 
+/* blogvediocode */
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #062c73; /* Same color as screenshot */
+}
+
+.video-container {
+    overflow: hidden;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #f8faff; /* Same light blue background */
+    padding: 20px 0;
+}
+
+.video-wrapper {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    width: max-content;
+}
+
+.video-box {
+    width: 350px;
+    flex-shrink: 0;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.video-box iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #062c73;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #051b4b;
+}
+
+@media (max-width: 768px) {
+    .video-box {
+        width: 100%;
+    }
+}
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+<!-- Slider Section -->
+<div id="hospitalSlider" class="carousel slide hospital-slider" data-bs-ride="carousel">
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+        <% slider.forEach((slide, index) => { %>
+            <button type="button" data-bs-target="#hospitalSlider" data-bs-slide-to="<%= index %>"
+                class="<%= index === 0 ? 'active' : '' %>"
+                aria-label="Slide <%= index + 1 %>"></button>
+        <% }); %>
+    </div>
+
+    <!-- Carousel Inner -->
+    <div class="carousel-inner">
+        <% slider.forEach((slide, index) => { %>
+        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+            <img src="/admin_assets/<%- slide.img1 %>" class="d-block w-100" alt="Hospital Image <%= index + 1 %>">
+            <div class="carousel-caption d-none d-md-block">
+                <h1><%- slide.text1 %></h1>
+                <p><%- slide.text2 %></p>
+                <a href="/appointment" class="btn btn-primary">Make an Appointment</a>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#hospitalSlider" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hospitalSlider" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+</div>
+
+ 
+
+ 
+ 
+    
+    <!-- aboutsection -->
+
+<section class="about-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Left Side Image -->
+             <div class="col-md-6 about-image">
+                <% about.forEach((about, index) => { %>
+                <img src="/admin_assets/<%= about.img %>" alt="About Image" class="img-fluid" width="80" height="500px">
+            </div>
+
+            <!-- Right Side Content -->
+            <div class="col-md-6 about-content">
+                <span class="badge">ABOUT US</span>
+                <h2 class="about-title"><%- about.heading %></h2>
+                <p class="about-description">
+                   <%-about.info%>
+                </p>
+
+                <ul class="about-list">
+                    <li><i class="fas fa-check"></i><%-about.tag1%></li>
+                    <li><i class="fas fa-check"></i> <%-about.tag2%></li>
+                    <li><i class="fas fa-check"></i><%-about.tag3%></li>
+                    <li><i class="fas fa-check"></i> <%-about.tag4%></li>
+                    <li><i class="fas fa-check"></i> <%-about.tag5%></li>
+                    <li><i class="fas fa-check"></i> <%-about.tag6%></li>
+                    <li><i class="fas fa-check"></i> <%-about.tag7%></li>
+                </ul>
+
+             </div>
+
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const observerOptions = {
+            root: null,  
+            rootMargin: "0px",
+            threshold: 0.2 
+        };
+    
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate");
+                }
+            });
+        };
+    
+        const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+    
+         document.querySelectorAll(".about-content, .about-image img, .about-title, .about-description, .about-list li, .btn-know-more").forEach(element => {
+            element.classList.add("hidden"); 
+            observer.observe(element);
+        });
+    });
+    </script>
+    
+
+
+ 
+
+
+
+
+
+
+
+
+<!-- Our Doctors Section -->
+<section class="doctors-section py-5">
+    <div class="container">
+        <h2 class="text-center section-title">Our Specialist Doctors</h2>
+        <div class="doctor-slider-wrapper">
+            <div class="doctor-slider">
+                <% doctor_info.forEach((doctor_info, index) => { %>
+                <div class="doctor-card">
+                    <div class="doctor-img-container">
+                        <img src="/admin_assets/<%= doctor_info.photo %>" alt="Dr. Ganesh Maid">
+                    </div>
+                    <div class="doctor-title">
+                        <h4><%-doctor_info.name%></h4>
+                        <p><%-doctor_info.specialty%></p>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    const doctorSlider = document.querySelector(".doctor-slider");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    
+    let scrollAmount = 0;
+    const cardWidth = document.querySelector(".doctor-card").offsetWidth + 20;
+    const totalWidth = doctorSlider.scrollWidth;
+    const visibleWidth = doctorSlider.parentElement.clientWidth;
+    
+    nextBtn.addEventListener("click", () => {
+        if (scrollAmount + visibleWidth < totalWidth) {
+            scrollAmount += cardWidth * 2;
+            doctorSlider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+        } else {
+            scrollAmount = 0;
+            doctorSlider.scrollTo({ left: 0, behavior: "smooth" });
+        }
+    });
+    
+    prevBtn.addEventListener("click", () => {
+        if (scrollAmount > 0) {
+            scrollAmount -= cardWidth * 2;
+            doctorSlider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+        } else {
+            scrollAmount = totalWidth - visibleWidth;
+            doctorSlider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+        }
+    });
+    </script>
+    
+
+    <!-- workingprocess -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <% countdown.forEach((countdown, index) => { %>
+            <div class="stat-card">
+                <img  src="/admin_assets/<%= countdown.image %>" width="90px" height="90px"></img>
+                <div class="stat-number" data-target="<%-countdown.info%>">0</div>
+                <div class="stat-title"><%-countdown.name%></div>
+            </div>
+            <% }); %>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll(".stat-number");
+            const speed = 200;  
+
+            const startCount = () => {
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute("data-target");
+                        const count = +counter.innerText;
+
+                        const increment = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + increment);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            const options = { threshold: 0.5 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCount();
+                        observer.disconnect();
+                    }
+                });
+            }, options);
+
+            observer.observe(document.querySelector(".stats-section"));
+        });
+    </script>
+
+
+<!-- contactusform -->
+
+ <!-- Contactus code -->
+
+ <section class="contact-section">
+    <div class="container-fluid">
+        <div class="contact-image">
+            <img src="/admin_assets/doctor_contact.webp" alt="Contact Image">
+        </div>
+        
+        <div class="form-container">
+            <span class="badge">CONTACT US</span>
+            <h2 class="form-title">Make an appointment <br> Apply for treatments</h2>
+            <form action="/save_appointment" method="post">
+                <input name="name" type="text" class="form-control" placeholder="Your Name *" required>
+                <input name="email" type="email" class="form-control" placeholder="Your Email *" required>
+                <input name="mobile" type="tel" class="form-control" placeholder="Your Phone *" required>
+                <input name="subject" type="text" class="form-control" placeholder="Subject">
+                <textarea name="message" class="form-control" rows="4" placeholder="Message"></textarea>
+                <button type="submit" class="btn-submit">SUBMIT NOW <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Blog Section -->
+<div class="container mt-4">
+    <h2 class="section-title text-center">📔 Hospital Blogs & 🎥 Doctor Videos</h2>
+    
+    <div class="video-container">
+        <div class="video-wrapper">
+            <% youtube.forEach((video, index) => { %>
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/<%= video.vedio %>"  allowfullscreen></iframe>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="btn-container text-center mt-3">
+        <button class="btn btn-primary me-2" onclick="prevVideos()">Previous</button>
+        <button class="btn btn-primary" onclick="nextVideos()">Next</button>
+    </div>
+</div>
+
+
+<script>
+    let index = 0;
+    const videosPerPage = 3;
+    const videoWrapper = document.querySelector(".video-wrapper");
+    const videoBoxes = document.querySelectorAll(".video-box");
+    const totalVideos = videoBoxes.length;
+    const videoWidth = 400 + 20;
+    
+    // Function to move videos in a loop
+    function updateSlider() {
+        let offset = index * -(videoWidth * videosPerPage);
+        videoWrapper.style.transform = `translateX(${offset}px)`;
+    }
+    
+    // Next Button: If last set, start from first again
+    function nextVideos() {
+        if (index < Math.ceil(totalVideos / videosPerPage) - 1) {
+            index++;
+        } else {
+            index = 0; // Loop back to the first set
+        }
+        updateSlider();
+    }
+    
+    // Previous Button: If first set, jump to last set
+    function prevVideos() {
+        if (index > 0) {
+            index--;
+        } else {
+            index = Math.ceil(totalVideos / videosPerPage) - 1; // Loop to last set
+        }
+        updateSlider();
+    }
+    </script>
+    
+    
+<%-include("footer.ejs")%>

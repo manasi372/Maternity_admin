@@ -1,0 +1,101 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .form-container, .table-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .img-thumbnail { width: 80px; height: 80px; object-fit: cover; margin: 3px; border-radius: 5px; }
+        .table td { vertical-align: middle; text-align: center; }
+        .action-btns { display: flex; gap: 5px; justify-content: center; align-items: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="text-center mb-4 text-primary">Add Blog</h2>
+        <form action="/admin/save_blog" method="POST" enctype="multipart/form-data">
+            
+            <!-- Upload Blog Image -->
+            <div class="mb-3">
+                <label class="form-label">Blog Image</label>
+                <input type="file" name="blogimage" class="form-control" required>
+            </div>
+
+            <!-- Blog Name -->
+            <div class="mb-3">
+                <label class="form-label">Blog Name</label>
+                <input type="text" name="blogname" class="form-control" required>
+            </div>
+
+            <!-- Blog Heading -->
+            <div class="mb-3">
+                <label class="form-label">Blog Heading</label>
+                <input type="text" name="blogheading" class="form-control" required>
+            </div>
+
+            <!-- Blog Info -->
+            <div class="mb-3">
+                <label class="form-label">Blog Info</label>
+                <textarea name="bloginfo" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Save Blog</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-container">
+        <h4 class="text-primary text-center">Blog List</h4>
+        <table class="table table-bordered">
+            <thead class="table-success">
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Blog Name</th>
+                    <th>Heading</th>
+                    <th>Info</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% blogs.map((row, i) => { %>
+                    <tr>
+                        <td><%= i + 1 %></td>
+                        <td>
+                            <img src="/admin_assets/<%= row.blogimage %>" class="img-thumbnail" alt="Blog Image">
+                        </td>
+                        <td><%= row.blogname %></td>
+                        <td><%= row.blogheading %></td>
+                        <td><%= row.bloginfo %></td>
+                        <td class="action-btns">
+                            <a href="/admin/edit_blog/<%= row.blogs_id %>" class="btn btn-warning btn-sm">✏ Edit</a>
+                            <a href="/admin/delete_blog/<%= row.blogs_id %>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm">🗑 Delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

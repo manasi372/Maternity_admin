@@ -1,0 +1,116 @@
+<%-include("navbar.ejs")%>
+
+<style>
+    /* slidercode */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.banner {
+     
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    filter: brightness(0.9) contrast(1.2);
+}
+.banner span {
+    display: inline-block;
+    transform: scale(1);
+    transition: transform 0.5s ease-in-out;
+}
+.banner:hover span {
+    transform: scale(1.1);
+}
+
+ 
+
+
+
+
+/* cardcode */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+.card-title {
+    font-weight: bold;
+    color:  #001f4d;
+}
+.card-text {
+    font-size: 14px;
+    color: #555;
+}
+.read-more {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+</style>
+
+
+<!-- blogcode -->
+<% blogslider.forEach((blogslider, index) => { %>  
+<div class="banner" style="background-image: url('/admin_assets/<%= blogslider.image %>');" data-aos="fade-down">
+    <span>BLOG ARCHIVES</span>
+    <% }); %>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+<!-- blogcardcode -->
+<!-- Blog Cards Section -->
+<div class="container mt-5">
+    <div class="row">
+        <% blogs.forEach((blogs, index) => { %>  
+            <div class="col-12 col-md-4 mb-4 mt-3" data-aos="fade-up">
+                <div class="card h-100">
+                    <img src="/admin_assets/<%- blogs.blogimage %>" class="card-img-top" alt="Blog Image">
+                    <div class="card-body">
+                        <span class="badge bg-primary">Healthcare Excellence</span>
+                        <h5 class="card-title"><%= blogs.blogheading %></h5>
+                        <p class="card-text"><%= blogs.bloginfo.substring(0, 100) %>...</p>
+                     </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    AOS.init();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+
+
+
+
+<%-include("footer.ejs")%>

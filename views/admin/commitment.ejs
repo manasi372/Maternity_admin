@@ -1,0 +1,148 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .form-container, .table-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .img-thumbnail { width: 100px; height: 100px; border-radius: 5px; object-fit: cover; }
+        
+        /* Fix for buttons */
+        .action-btns { 
+            display: flex; 
+            gap: 5px; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .btn-sm { 
+            font-size: 14px; 
+            padding: 6px 6px; 
+            height: 40px; 
+            min-width: 85px; /* Ensures buttons are equal */
+        }
+
+        .commitment-list ul { padding-left: 20px; margin-bottom: 0; }
+        .commitment-list li { list-style-type: disc; }
+
+        /* Fix alignment issue */
+        .table td { vertical-align: middle; text-align: center; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2 class="text-center mb-4 text-primary">Add Details</h2>
+        <form action="/admin/save_commitment" method="POST" enctype="multipart/form-data">
+            
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label class="form-label">Upload Image</label>
+                <input type="file" name="photo" class="form-control">
+            </div>
+
+            <!-- Main Heading -->
+            <div class="mb-3">
+                <label class="form-label">Main Heading</label>
+                <input type="text" name="heading" class="form-control" placeholder="Enter Main Heading">
+            </div>
+
+            <!-- Subheading -->
+            <div class="mb-3">
+                <label class="form-label">Subheading</label>
+                <input type="text" name="subheading" class="form-control" placeholder="Enter Subheading">
+            </div>
+
+            <!-- Commitments in Two Columns -->
+            <div class="row">
+                <% for (let i = 1; i <= 4; i++) { %>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Commitment <%= i %></label>
+                            <input type="text" name="commitment<%= i %>" class="form-control" placeholder="Enter Commitment <%= i %>">
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-container">
+        <h4 class="text-primary text-center">Submitted Data</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Main Heading</th>
+                        <th>Subheading</th>
+                        <th>Commitments</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (commitment.length > 0) { %>
+                        <% commitment.forEach((row, i) => { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td>
+                                    <% if (row.photo) { %>
+                                        <img src="/admin_assets/<%= row.photo %>" class="img-thumbnail">
+                                    <% } else { %>
+                                        <span>No Image</span>
+                                    <% } %>
+                                </td>
+                                
+                                <td><%= row.heading %></td>
+                                <td><%= row.subheading %></td>
+                                <td class="commitment-list">
+                                    <ul>
+                                        <li><%= row.commitment1 %></li>
+                                        <li><%= row.commitment2 %></li>
+                                        <li><%= row.commitment3 %></li>
+                                        <li><%= row.commitment4 %></li>
+                                    </ul>
+                                </td>
+                                <td class="action-btns">
+                                    <a href="/admin/edit_commitment/<%= row.commitment_id %>" class="btn btn-warning btn-sm">✏ Edit</a>
+                                    <a href="/admin/delete_commitment/<%= row.commitment_id %>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm">🗑 Delete</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6" class="text-center">No records found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

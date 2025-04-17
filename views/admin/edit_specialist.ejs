@@ -1,0 +1,36 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-4">
+    <div class="form-box">
+        <h5 class="text-primary text-center">Edit Specialist</h5>
+        <form action="/admin/update_specialist/<%= specialist.specialist_id %>" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="old_photo" value="<%= specialist.photo %>">  <!-- Keep Old Image -->
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Specialist Name</label>
+                <input type="text" name="name" class="form-control" value="<%= specialist.name %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Specialization</label>
+                <input type="text" name="specialty" class="form-control" value="<%= specialist.specialty %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Current Image</label><br>
+                <% if (specialist.photo) { %>
+                    <img src="/admin_assets/<%= specialist.photo %>" class="img-thumbnail" width="80">
+                <% } %>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Upload New Image</label>
+                <input type="file" name="photo" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Update Specialist</button>
+        </form>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>

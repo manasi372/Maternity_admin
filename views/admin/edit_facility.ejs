@@ -1,0 +1,73 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Facility</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .form-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .img-thumbnail { width: 100px; height: 100px; border-radius: 5px; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="text-center mb-4 text-primary">Edit Facility</h2>
+        <form action="/admin/update_facility/<%= facility.facility_id %>" method="POST" enctype="multipart/form-data">
+            
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label class="form-label">Current Image</label><br>
+                <% if (facility.image) { %>
+                    <img src="/admin_assets/<%= facility.image %>" class="img-thumbnail mb-2">
+                <% } else { %>
+                    <span>No Image</span>
+                <% } %>
+                <input type="file" name="image" class="form-control mt-2">
+                <input type="hidden" name="old_image" value="<%= facility.image %>">
+            </div>
+
+            <!-- Main Heading -->
+            <div class="mb-3">
+                <label class="form-label">Main Heading</label>
+                <input type="text" name="main_heading" class="form-control" value="<%= facility.main_heading %>" required>
+            </div>
+
+            <!-- Name -->
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" value="<%= facility.name %>" required>
+            </div>
+
+            <!-- Information -->
+            <div class="mb-3">
+                <label class="form-label">Information</label>
+                <textarea name="info" class="form-control" rows="3" required><%= facility.info %></textarea>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Update Facility</button>
+                <a href="/admin/facility" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

@@ -1,0 +1,142 @@
+<%-include("navbar.ejs")%>
+
+<style>
+    /* insurencecode */
+body {
+    font-family: Arial, sans-serif;
+}
+.hero1 {
+    height: 85vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white; /* Ensure text is visible on the image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text readability */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero1 h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero1 p {
+    font-size: 1.5rem;
+}
+
+
+/* Insurance Plans Animations */
+#plans {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease-in-out forwards;
+}
+
+.plan-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    animation: zoomIn 1s ease-in-out;
+}
+
+.plan-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes flipIn {
+    from { opacity: 0; transform: rotateY(90deg); }
+    to { opacity: 1; transform: rotateY(0); }
+}
+
+@keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+
+
+
+
+
+
+</style>
+<% insurenceslider.forEach((insurenceslider, index) => { %>  
+    <section class="hero1" style="background-image: url('/admin_assets/<%= insurenceslider.insurence_img %>');">
+       <div class="container hero-content">
+           <h1><%= insurenceslider.insurence_title %></h1>
+           <p><%= insurenceslider.insurence_subtitle %></p>
+           <a href="#plans" class="btn btn-primary btn-lg">Explore Plans</a>
+       </div>
+    </section>
+  <% }); %>
+  
+
+
+
+
+<!-- Insurance Plans -->
+<!-- Insurance Plans -->
+<section id="plans" class="container my-5">
+    <div class="text-center mb-4">
+        <h2>Our Insurance Plans</h2>
+        <p>Choose the best plan that suits your needs.</p>
+    </div>
+
+    <div class="row"> <!-- Move row div outside loop -->
+        <% insuranceplans.forEach((plan, index) => { %>  <!-- Fix variable name -->
+            <div class="col-md-4 mb-4">  <!-- Added margin-bottom for spacing -->
+                <div class="card plan-card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><%= plan.plan_name %></h5>
+                        <p class="card-text"><%= plan.plan_info %></p>
+                        <p class="price">$<%= plan.plan_price %></p>
+                        <a href="#" class="btn btn-outline-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div> <!-- Close row div here -->
+</section>
+
+<%- include("footer.ejs") %>
+
+ 

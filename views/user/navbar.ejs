@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Responsive Navbar</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f8fb;
+        }
+
+        /* Navbar Styling */
+        .demo1-navbar {
+            background: linear-gradient(135deg, #004080, #001f4d);
+            padding: 10px 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #00c2ff;
+        }
+
+        .demo1-navbar .logo img {
+            height: 50px;
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+        }
+        
+        .demo1-navbar .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .demo1-navbar .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .demo1-navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 6px 10px;
+            position: relative;
+        }
+
+        .demo1-navbar .nav-links a::after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background: #00c2ff;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .demo1-navbar .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Emergency & Appointment Section */
+        .demo1-sections {
+            display: flex;
+            gap: 10px;
+        }
+
+        .demo1-emergency, .demo1-appointment {
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 14px;
+        }
+
+        .demo1-emergency {
+            background: linear-gradient(45deg, red, darkred);
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .demo1-appointment {
+            background: linear-gradient(45deg, green, darkgreen);
+        }
+
+        .demo1-emergency:hover, .demo1-appointment:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px red; }
+            to { box-shadow: 0 0 15px darkred; }
+        }
+
+        /* Social Media Icons */
+        .demo1-social {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .demo1-social a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .demo1-social a:hover {
+            color: #00c2ff;
+            transform: scale(1.2);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .demo1-navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 8px;
+            }
+
+            .demo1-navbar .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .demo1-sections {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                margin-top: 10px;
+            }
+
+            .demo1-social {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <!-- Navbar -->
+   <nav class="demo1-navbar navbar navbar-expand-lg navbar-dark">
+    <div class="logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQYaKr9aU4J2DbEVTb9eWJn1lgxhCo6LkC1hyFwaGYTfKLDaqeObIPWk0ozndvFuaaxvo&usqp=CAU" alt="Hospital Logo">
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="nav-links ms-auto">
+            <a href="/">Home</a>
+            <a href="/aboutpage">About</a>
+            <a href="/servicepage">Services</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/insurence">Insurance</a>
+            <a href="/blog">Blog</a>
+            <a href="/contactus">Contact</a>
+            <a href="/appointment">Appointment</a>
+        </div>
+    </div>
+    <div class="demo1-sections d-none d-lg-flex">
+        <a href="tel:8886606060" class="demo1-emergency">
+            <i class="fas fa-ambulance"></i> Emergency: 8886-606060
+        </a>
+        <a href="tel:9999555555" class="demo1-appointment">
+            <i class="fas fa-phone"></i> Appointment: 9999-555555
+        </a>
+    </div>
+    <div class="demo1-social d-none d-lg-flex">
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+</nav>
+</body>
+</html>

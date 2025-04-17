@@ -1,0 +1,95 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Commitment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .form-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .img-preview {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="text-center mb-4 text-primary">Edit Commitment</h2>
+        <form action="/admin/update_commitment/<%= commitment.commitment_id %>" method="POST" enctype="multipart/form-data">
+            
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label class="form-label">Upload Image</label>
+                <input type="file" name="photo" class="form-control" onchange="previewImage(event)">
+                <% if (commitment.photo) { %>
+                    <img id="imagePreview" src="/admin_assets/<%= commitment.photo %>" class="img-preview">
+                <% } else { %>
+                    <img id="imagePreview" src="" class="img-preview d-none">
+                <% } %>
+            </div>
+
+            <!-- Main Heading -->
+            <div class="mb-3">
+                <label class="form-label">Main Heading</label>
+                <input type="text" name="heading" class="form-control" value="<%= commitment.heading %>">
+            </div>
+
+            <!-- Subheading -->
+            <div class="mb-3">
+                <label class="form-label">Subheading</label>
+                <input type="text" name="subheading" class="form-control" value="<%= commitment.subheading %>">
+            </div>
+
+            <!-- Commitments -->
+            <div class="row">
+                <% for (let i = 1; i <= 4; i++) { %>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Commitment <%= i %></label>
+                            <input type="text" name="commitment<%= i %>" class="form-control" value="<%= commitment['commitment' + i] %>">
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success">Update</button>
+                <a href="/admin/commitment" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        let reader = new FileReader();
+        reader.onload = function() {
+            let output = document.getElementById('imagePreview');
+            output.src = reader.result;
+            output.classList.remove('d-none');
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

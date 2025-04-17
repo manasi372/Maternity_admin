@@ -1,0 +1,123 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Reviews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .form-container, .table-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .img-thumbnail { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; }
+        
+        /* Buttons */
+        .action-btns { 
+            display: flex; 
+            gap: 5px; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .btn-sm { 
+            font-size: 14px; 
+            padding: 6px 6px; 
+            height: 40px; 
+            min-width: 85px; 
+        }
+
+        .table td { vertical-align: middle; text-align: center; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2 class="text-center mb-4 text-primary">Add Client Review</h2>
+        <form action="/admin/save_review" method="POST" enctype="multipart/form-data">
+            
+            <!-- Client Photo -->
+            <div class="mb-3">
+                <label class="form-label">Upload Client Photo</label>
+                <input type="file" name="client_photo" class="form-control">
+            </div>
+
+            <!-- Client Name -->
+            <div class="mb-3">
+                <label class="form-label">Client Name</label>
+                <input type="text" name="client_name" class="form-control" placeholder="Enter Client Name">
+            </div>
+
+            <!-- Client Review -->
+            <div class="mb-3">
+                <label class="form-label">Client Review</label>
+                <textarea name="client_review" class="form-control" rows="3" placeholder="Enter Client Review"></textarea>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-container">
+        <h4 class="text-primary text-center">Submitted Client Reviews</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>#</th>
+                        <th>Photo</th>
+                        <th>Client Name</th>
+                        <th>Review</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (reviews.length > 0) { %>
+                        <% reviews.forEach((row, i) => { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td>
+                                    <% if (row.client_photo) { %>
+                                        <img src="/admin_assets/<%= row.client_photo %>" class="img-thumbnail">
+                                    <% } else { %>
+                                        <span>No Image</span>
+                                    <% } %>
+                                </td>
+                                
+                                <td><%= row.client_name %></td>
+                                <td><%= row.client_review %></td>
+                                <td class="action-btns">
+                                    <a href="/admin/edit_review/<%= row.review_id %>" class="btn btn-warning btn-sm">✏ Edit</a>
+                                    <a href="/admin/delete_review/<%= row.review_id %>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm">🗑 Delete</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5" class="text-center">No reviews found</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

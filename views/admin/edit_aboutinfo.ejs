@@ -1,0 +1,76 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit About Info</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="form-box p-4 bg-white shadow rounded">
+        <h4 class="text-center text-primary">Edit About Info</h4>
+        <form action="/admin/update_aboutinfo/<%= about.id %>" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<%= about.id %>">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Title 1</label>
+                    <input type="text" name="title1" class="form-control" value="<%= about.title1 %>" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Current Image 1</label><br>
+                    <% if (about.paimg1) { %>
+                        <img src="/admin_assets/<%= about.paimg1 %>" width="80">
+                    <% } else { %>
+                        <img src="/admin_assets/default.jpg" width="80">
+                    <% } %>
+                    <input type="file" name="paimg1" class="form-control mt-2">
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label">Information 1</label>
+                    <textarea name="information" class="form-control" required><%= about.information %></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Title 2</label>
+                    <input type="text" name="title2" class="form-control" value="<%= about.title2 %>" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Current Image 2</label><br>
+                    <% if (about.drimg2) { %>
+                        <img src="/admin_assets/<%= about.drimg2 %>" width="80">
+                    <% } else { %>
+                        <img src="/admin_assets/default.jpg" width="80">
+                    <% } %>
+                    <input type="file" name="drimg2" class="form-control mt-2">
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label">Information 2</label>
+                    <textarea name="information2" class="form-control" required><%= about.information2 %></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Title 3</label>
+                    <input type="text" name="title3" class="form-control" value="<%= about.title3 %>" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label">Information 3</label>
+                    <textarea name="information3" class="form-control" required><%= about.information3 %></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Update About Info</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
+<%- include("footer.ejs") %>

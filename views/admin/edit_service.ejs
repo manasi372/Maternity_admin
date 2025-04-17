@@ -1,0 +1,82 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .form-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .img-preview {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .img-thumbnail { width: 120px; height: 120px; border-radius: 5px; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Edit Service Form -->
+    <div class="form-container">
+        <h2 class="text-center mb-4 text-warning">Edit Service</h2>
+        <form action="/admin/update_service/<%= service.id %>" method="POST" enctype="multipart/form-data">
+            
+            <!-- Image Preview -->
+            <div class="img-preview">
+                <% if (service.image) { %>
+                    <img src="/admin_assets/<%= service.image %>" class="img-thumbnail">
+                <% } else { %>
+                    <span>No Image Available</span>
+                <% } %>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label class="form-label">Upload New Image</label>
+                <input type="file" name="image" class="form-control">
+            </div>
+
+            <!-- Heading -->
+            <div class="mb-3">
+                <label class="form-label">Heading</label>
+                <input type="text" name="heading" class="form-control" value="<%= service.heading %>">
+            </div>
+
+            <!-- Subheading -->
+            <div class="mb-3">
+                <label class="form-label">Subheading</label>
+                <input type="text" name="subheading" class="form-control" value="<%= service.subheading %>">
+            </div>
+
+            <!-- Information -->
+            <div class="mb-3">
+                <label class="form-label">Information</label>
+                <textarea name="information" class="form-control" rows="3"><%= service.information %></textarea>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-warning">Update</button>
+                <a href="/admin/service" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

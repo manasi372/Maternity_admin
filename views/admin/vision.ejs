@@ -1,0 +1,117 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    
+    <!-- Vision Info Form -->
+    <div class="form-box p-4 bg-white shadow rounded">
+        <h4 class="text-center text-primary">Add Vision Info</h4>
+        <form action="/admin/save_aboutinfo" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Title 1</label>
+                    <input type="text" name="title1" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Image 1</label>
+                    <input type="file" name="paimg1" class="form-control">
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label">Information 1</label>
+                    <textarea name="information" class="form-control" required></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Title 2</label>
+                    <input type="text" name="title2" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Image 2</label>
+                    <input type="file" name="drimg2" class="form-control">
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label">Information 2</label>
+                    <textarea name="information2" class="form-control" required></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Title 3</label>
+                    <input type="text" name="title3" class="form-control" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label">Information 3</label>
+                    <textarea name="information3" class="form-control" required></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save Vision Info</button>
+        </form>
+    </div>
+
+    <!-- Vision Info List Table -->
+    <div class="table-box mt-4 p-4 bg-white shadow rounded">
+        <h4 class="text-center text-primary">Vision Info List</h4>
+        <table class="table table-bordered text-center">
+            <thead class="table-success">
+                <tr>
+                    <th>ID</th>
+                    <th>Image 1</th>
+                    <th>Title 1</th>
+                    <th>Information 1</th>
+                    <th>Image 2</th>
+                    <th>Title 2</th>
+                    <th>Information 2</th>
+                    <th>Title 3</th>
+                    <th>Information 3</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% aboutInfo.forEach((row) => { %>
+                    <tr>
+                        <td><%= row.id %></td>
+                        <td>
+                            <% if (row.paimg1) { %>
+                                <img src="/admin_assets/<%= row.paimg1 %>" width="80" class="rounded">
+                            <% } else { %>
+                                <img src="/admin_assets/default.jpg" width="80" class="rounded">
+                            <% } %>
+                        </td>
+                        <td><%= row.title1 %></td>
+                        <td><%= row.information %></td>
+                        <td>
+                            <% if (row.drimg2) { %>
+                                <img src="/admin_assets/<%= row.drimg2 %>" width="80" class="rounded">
+                            <% } else { %>
+                                <img src="/admin_assets/default.jpg" width="80" class="rounded">
+                            <% } %>
+                        </td>
+                        <td><%= row.title2 %></td>
+                        <td><%= row.information2 %></td>
+                        <td><%= row.title3 %></td>
+                        <td><%= row.information3 %></td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center">
+                                <a href="/admin/edit_aboutinfo/<%= row.id %>" class="btn btn-warning btn-sm me-2">Edit</a>
+                                <a href="/admin/delete_aboutinfo/<%= row.id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+
+<%- include("footer.ejs") %>

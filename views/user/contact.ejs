@@ -1,0 +1,409 @@
+<%-include("navbar.ejs")%>
+<style>
+
+    /* aboutpage */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* About Us Section */
+.aboutus-section {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+     background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay;
+}
+
+/* Dark Overlay */
+.aboutus-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Content */
+.aboutus-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+/* Animated Heading */
+.animated-text span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: textFadeIn 0.8s forwards;
+    font-size: 50px;
+ }
+
+.animated-text span:nth-child(n) { animation-delay: calc(0.1s * var(--i)); }
+
+/* Paragraph Animation */
+.aboutus-content p {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 1s ease-in-out forwards 0.5s;
+}
+
+/* Button */
+.aboutus-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s;
+    display: inline-block;
+    opacity: 0;
+    animation: fadeSlideIn 1s ease-in-out forwards 0.8s;
+}
+
+.aboutus-btn:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Keyframes */
+@keyframes textFadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .aboutus-section {
+        height: auto;
+        padding: 80px 20px;
+    }
+
+    .aboutus-content {
+        max-width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .aboutus-content h2 {
+        font-size: 28px;
+    }
+
+    .aboutus-content p {
+        font-size: 16px;
+    }
+}
+
+
+  /* Card CSS */
+body {
+    background-color: #f0f8ff;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    flex-wrap: wrap;
+}
+
+.box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 30%;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.box img {
+    width: 50px;  /* Set a fixed width */
+    height: 50px;  /* Set a fixed height */
+    object-fit: contain;  /* Ensures the full image is visible */
+    border-radius: 5px;  /* Slight border rounding */
+    margin: 0 auto 10px;  /* Centers the image and adds spacing */
+    display: block;  /* Ensures proper alignment */
+}
+
+
+
+h3 {
+    color: #002f6c;
+    margin: 10px 0;
+}
+
+p {
+    color: #333;
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .box {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 20px;
+    }
+    .box {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .box {
+        width: 100%;
+        padding: 15px;
+    }
+    .box img {
+        max-width: 200px;
+        height: 150px;
+    }
+}
+
+
+/* contactuscode */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+}
+
+body {
+    background-color: #f0f8ff;
+}
+
+.contact-container {
+    display: flex;
+    max-width: 1100px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.contact-image {
+    flex: 1;
+    background: url('public/cform.webp') no-repeat center;
+    background-size: cover;
+    min-height: 600px;
+}
+
+.contact-form {
+    flex: 1;
+    padding: 50px;
+}
+
+.contact-form h2 {
+    color: #002f6c;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.contact-form .input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 48%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.contact-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #002f6c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #004aad;
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 1024px) {
+    .contact-container {
+        flex-direction: column;
+    }
+    .contact-image {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .contact-form {
+        padding: 30px;
+    }
+    .input-group {
+        flex-direction: column;
+    }
+    .input-group input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-form {
+        padding: 20px;
+    }
+    .contact-form h2 {
+        font-size: 22px;
+    }
+    .submit-btn {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+/* googlemapcode */
+
+.map-container {
+    width: 100%;
+    height: 500px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+iframe {
+    width: 100%;
+    height:480px;
+    border: 0;
+    border-radius: 20px;
+}
+</style>
+
+
+ <!-- About Page -->
+ <section class="aboutus-section" 
+ style="background-image: url('/admin_assets/<%= contactslider.length > 0 ? contactslider[0].contactimage : '' %>'); 
+ background-size: cover; background-position: center; background-repeat: no-repeat;">
+ 
+ <div class="aboutus-overlay"></div>
+ 
+ <div class="aboutus-content">
+     <h2 class="animated-text">
+         <span style="--i:1">c</span><span style="--i:2">o</span><span style="--i:3">n</span><span style="--i:4">t</span>
+         <span style="--i:5">a</span><span style="--i:6">c</span><span style="--i:7">t</span> 
+         <span style="--i:8">U</span><span style="--i:9">s</span>
+     </h2>
+ </div>
+</section>
+
+
+
+
+ 
+
+ 
+
+<!-- cardcode -->
+
+<div class="container">
+    <% contactsource.forEach((contactsourcer, index) => { %>  
+        <div class="box box1">
+            <!-- Responsive Image -->
+            <img src="/admin_assets/<%= contactsourcer.image %>" alt="Contact Image">
+            <h3><%- contactsourcer.heading %></h3>
+            <p><%- contactsourcer.info1 %></p>
+            <p><%- contactsourcer.info2 %></p>
+        </div>
+    <% }); %>
+</div>
+
+
+
+<!-- contactusformcode -->
+
+<div class="contact-container">
+            
+            <div class="contact-image">
+                <img src="/admin_assets/doctor_contact.webp" alt="Contact Image" height="600px">
+            </div>
+<div class="contact-form">
+    <h2>Make an appointment <br> Apply for treatments</h2>
+    <form  action="/save_form" method="post">
+        <div class="input-group">
+            <input name="name" type="text" placeholder="Your Name *" required>
+            <input name="email" type="email" placeholder="Your Email *" required>
+        </div>
+        <div class="input-group">
+            <input name="mobile" type="tel" placeholder="Your Phone *" required>
+            <input name="subject" type="text" placeholder="Subject">
+        </div>
+        <textarea name="message" placeholder="Message" required></textarea>
+        <button  class="submit-btn">SUBMIT NOW <i class="fas fa-arrow-right"></i></button>
+    </form>
+</div>
+</div>
+
+
+
+
+<!-- Google Map -->
+<div class="col-lg-12 col-md-12 col-12">
+<div class="map-container-fluid">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.5708894529527!2d73.85674381524682!3d18.52043008740869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c0654e4d9a1f%3A0xa20d1a32e09e6b8!2sMhaske%20Hospital!5e0!3m2!1sen!2sin!4v1610102345678!5m2!1sen!2sin" 
+        allowfullscreen="" loading="lazy">
+    </iframe>
+</div>
+</div>
+
+<%-include("footer.ejs")%>

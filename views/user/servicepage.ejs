@@ -1,0 +1,187 @@
+<%-include("navbar.ejs")%>
+
+<style>
+    /* sliderservice */
+
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    background: #f4f8ff;
+}
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eaf2ff;
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+}
+.hero-content {
+    width: 50%;
+    animation: slideInLeft 1.5s ease-in-out;
+}
+.hero-content h1 {
+    font-size: 48px;
+    color: #0a4da2;
+}
+.hero-content p {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+.breadcrumb {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+.hero-image {
+    width: 50%;
+    animation: fadeIn 2s ease-in-out;
+}
+.hero-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+    .hero-content, .hero-image {
+        width: 100%;
+    }
+}
+
+
+/* service/facility */
+
+/* services */
+.facilities-section {
+    background-color: #e8f1fb; /* Light Blue Background */
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.facility-box {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.facility-box:hover {
+    transform: translateY(-5px);
+}
+
+.facility-box img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.facility-box h4 {
+    font-size: 1.2rem;
+    margin-top: 15px;
+    color: #333;
+}
+
+.facility-box p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #217dbb;
+}
+
+
+
+
+
+
+</style>
+<div class="hero-section">
+     <div class="hero-content">
+        <% services.forEach((services, index) => { %>  <!-- Fix variable name -->
+        <div class="breadcrumb"><%-services.subheading %></div>
+        <h1><%-services.heading %></h1>
+        <p><%-services.information %></p>
+    </div>
+    <div class="hero-image">
+        <img src="/admin_assets/<%-services.image %>" alt="Ophthalmology Doctor">
+    </div>
+    <% }); %>
+
+</div>
+
+
+<!-- facilities/services -->
+
+<!-- services -->
+<section class="facilities-section py-5">
+    <div class="container">
+        <h2 class="text-center section-title">Facilities/Services</h2>
+        <div class="row">
+            <% facilities.forEach((facilities, index) => { %>  <!-- Fix variable name -->
+            <div class="col-md-6 col-lg-3">
+                <div class="facility-box text-center">
+                    <img src="/admin_assets/<%-facilities.image %>" alt="Stoma Clinic" class="img-fluid">
+                    <h4><%-facilities.name %></h4>
+                    <p><%-facilities.info %></p>
+                    <!-- <a href="#" class="btn btn-primary">Read More</a> -->
+                </div>
+            </div>
+            <% }); %>
+
+             
+            
+            </div>
+             
+        </div>
+    </div>
+</section>
+
+
+<%-include("footer.ejs")%>

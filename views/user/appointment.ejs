@@ -1,0 +1,111 @@
+<%-include("navbar.ejs")%>
+
+<style>
+    
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f9ff;
+}
+.contact-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #e8f1fb;
+    padding: 50px 10px;
+}
+.container-fluid {
+    display: flex;
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.contact-image {
+    width: 50%;
+}
+.contact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.form-container {
+    width: 50%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.badge {
+    display: inline-block;
+    background: #002f6c;
+    color: #fff;
+    padding-top:5px;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 35px;
+ }
+.form-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #002f6c;
+    margin: 20px 0;
+}
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.btn-submit {
+    background: #002f6c;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.btn-submit i {
+    margin-left: 5px;
+}
+.btn-submit:hover {
+    background: #004bb5;
+}
+@media (max-width: 768px) {
+    .container-fluid {
+        flex-direction: column;
+    }
+    .contact-image, .form-container {
+        width: 100%;
+    }
+}
+
+</style>
+<section class="contact-section">
+    <div class="container-fluid">
+        <div class="contact-image">
+            <img src="/admin_assets/doctor_contact.webp" alt="Contact Image">
+        </div>
+        
+        <div class="form-container">
+            <span class="badge">CONTACT US</span>
+            <h2 class="form-title">Make an appointment <br> Apply for treatments</h2>
+            <form action="/save_appointment" method="post">
+                <input name="name" type="text" class="form-control" placeholder="Your Name *" required>
+                <input name="email" type="email" class="form-control" placeholder="Your Email *" required>
+                <input name="mobile" type="tel" class="form-control" placeholder="Your Phone *" required>
+                <input name="subject" type="text" class="form-control" placeholder="Subject">
+                <textarea name="message" class="form-control" rows="4" placeholder="Message"></textarea>
+                <button type="submit" class="btn-submit">SUBMIT NOW <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+</section>
+<%-include("footer.ejs")%>

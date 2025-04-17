@@ -1,0 +1,74 @@
+<%- include("navbar.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Insurance Slider</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .img-preview {
+            display: block;
+            max-width: 150px;
+            margin: 10px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="text-center mb-4 text-primary">Edit Insurance Slider</h2>
+        <form action="/admin/update_insurance_slider/<%= insurenceslider.insurenceslider_id %>" method="POST" enctype="multipart/form-data">
+            
+            <!-- Current Image Preview -->
+            <div class="text-center">
+                <label class="form-label">Current Image</label>
+                <img src="/admin_assets/<%= insurenceslider.insurence_img %>" class="img-preview" alt="Current Insurance Image">
+            </div>
+
+            <!-- Upload New Image -->
+            <div class="mb-3">
+                <label class="form-label">Upload New Image (Optional)</label>
+                <input type="file" name="insurence_img" class="form-control">
+                <input type="hidden" name="old_insurence_img" value="<%= insurenceslider.insurence_img %>">
+            </div>
+
+            <!-- Insurance Title -->
+            <div class="mb-3">
+                <label class="form-label">Insurance Title</label>
+                <input type="text" name="insurence_title" class="form-control" value="<%= insurenceslider.insurence_title %>" required>
+            </div>
+
+            <!-- Insurance Subtitle -->
+            <div class="mb-3">
+                <label class="form-label">Insurance Subtitle</label>
+                <input type="text" name="insurence_subtitle" class="form-control" value="<%= insurenceslider.insurence_subtitle %>" required>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success">Update</button>
+                <a href="/admin/insurenceslider" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<%- include("footer.ejs") %>

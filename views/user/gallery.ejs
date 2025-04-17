@@ -1,0 +1,282 @@
+<%-include("navbar.ejs")%>
+
+<style>
+     /* gallerypagecode */
+.hospital-gallery {
+    text-align: center;
+    padding: 0;
+    background: #e3f2fd;
+    position: relative;
+}
+.gallery-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    /* animation: fadeInDown 1s ease-in-out; */
+    color:#002f6c;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(238, 229, 229, 0.5);
+    padding: 15px 25px;
+    border-radius: 10px;
+}
+.gallery-desc {
+    font-size: 1.2rem;
+    color:#002f6c;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(238, 229, 229, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
+    animation: slideText 3s ease-in-out infinite alternate;
+}
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slideText {
+    from {
+        transform: translateX(-50%) translateY(-10px);
+        opacity: 0.8;
+    }
+    to {
+        transform: translateX(-50%) translateY(10px);
+        opacity: 1;
+    }
+}
+.carousel-item img {
+    width: 100%;
+    height: 85vh;
+    object-fit: cover;
+    filter: brightness(80%) contrast(1.1);
+}
+
+
+
+
+/* galleryimgcode */
+
+/* ========================== */
+/* 🎨 Hospital Gallery Styling */
+/* ========================== */
+
+.hospital-gallery {
+    text-align: center;
+    padding: 0;
+    background: #e3f2fd;
+    position: relative;
+}
+
+/* ⭐ Gallery Heading */
+.gallery-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #002f6c;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(238, 229, 229, 0.5);
+    padding: 15px 25px;
+    border-radius: 10px;
+    /* animation: fadeInDown 1s ease-in-out; */
+}
+
+/* 📝 Gallery Description */
+.gallery-desc {
+    font-size: 1.2rem;
+    color: #002f6c;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(238, 229, 229, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
+    animation: slideText 3s ease-in-out infinite alternate;
+}
+
+/* 🔄 Carousel Image */
+.carousel-item img {
+    width: 100%;
+    height: 85vh;
+    object-fit: cover;
+    filter: brightness(80%) contrast(1.1);
+}
+
+/* ========================== */
+/* 🖼️ Gallery Images Styling */
+/* ========================== */
+
+.hospital-gallery1 {
+    padding: 50px 0;
+    background: #f8f9fa;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* 🖼️ Image Container */
+.gallery-container1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+/* 📦 Image Boxes */
+.box1, .box2, .box3 {
+    flex: 1 1 300px;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+/* 🖼️ Image Styling */
+.box1 img, .box2 img, .box3 img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: 0.3s ease-in-out;
+}
+
+/* 🌟 Hover Effect */
+.box1:hover img, .box2:hover img, .box3:hover img {
+    filter: brightness(70%) contrast(1.2);
+    transform: scale(1.05);
+}
+
+/* 📌 Active (Click) Effect */
+.box1:active img, .box2:active img, .box3:active img {
+    filter: brightness(50%) contrast(1.5);
+}
+
+/* ========================== */
+/* 🎬 Keyframe Animations */
+/* ========================== */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideText {
+    from {
+        transform: translateX(-50%) translateY(-10px);
+        opacity: 0.8;
+    }
+    to {
+        transform: translateX(-50%) translateY(10px);
+        opacity: 1;
+    }
+}
+
+/* ========================== */
+/* 📱 Responsive Design */
+/* ========================== */
+
+@media (max-width: 768px) {
+    .gallery-heading {
+        font-size: 2rem;
+        padding: 10px 20px;
+    }
+    .gallery-desc {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+    .carousel-item img {
+        height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-heading {
+        font-size: 1.8rem;
+    }
+    .gallery-desc {
+        font-size: 0.9rem;
+    }
+    .carousel-item img {
+        height: 50vh;
+    }
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+<!-- gallerypagecode -->
+
+<div class="container-fluid hospital-gallery">
+    <div id="hospitalCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <% gallery.forEach((gallery, index) => { %>  
+            <div class="carousel-item active">
+                <img src="/admin_assets/<%= gallery.image %>" class="d-block w-100" alt="Hospital Image 1">
+            </div>
+        </div>
+    </div>
+    <h2 class="gallery-heading"><%-gallery.gallery_heading %></h2>
+    <p class="gallery-desc"><%-gallery.gallery_info %></p>
+    <% }); %>
+
+</div>
+
+
+<!-- Gallery Images -->
+<div class="container1 hospital-gallery" style="margin-top:50px;">
+     <div class="gallery-container1">
+        <% gallery_image.forEach((gallery_image, index) => { %>  
+         <div class="box1" data-aos="flip-left"><img src="/admin_assets/<%= gallery_image.image1 %>" alt="Hospital Image 1"></div>
+         <% }); %>
+
+    </div>
+     </div>
+</div> 
+
+<!-- AOS Animation JS -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,  // Animation speed
+        easing: 'ease-in-out', // Smooth effect
+        once: true // Animation runs only once
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<%-include("footer.ejs")%>

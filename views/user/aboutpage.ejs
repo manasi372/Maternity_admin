@@ -1,0 +1,866 @@
+<%-include("navbar.ejs")%>
+
+
+<style>
+    /* aboutpage */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* About Us Section */
+.aboutus-section {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+   
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay;
+}
+
+/* Dark Overlay */
+.aboutus-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Content */
+.aboutus-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+/* Animated Heading */
+.animated-text span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: textFadeIn 0.8s forwards;
+}
+
+.animated-text span:nth-child(n) { animation-delay: calc(0.1s * var(--i)); }
+
+/* Paragraph Animation */
+.aboutus-content p {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 1s ease-in-out forwards 0.5s;
+}
+
+/* Button */
+.aboutus-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background:  #002f6c;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s;
+    display: inline-block;
+    opacity: 0;
+    animation: fadeSlideIn 1s ease-in-out forwards 0.8s;
+}
+
+.aboutus-btn:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Keyframes */
+@keyframes textFadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .aboutus-section {
+        height: auto;
+        padding: 80px 20px;
+    }
+
+    .aboutus-content {
+        max-width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .aboutus-content h2 {
+        font-size: 28px;
+    }
+
+    .aboutus-content p {
+        font-size: 16px;
+    }
+}
+
+
+/* abouinfocode */
+ 
+/* About Us Section */
+.about-section {
+    padding: 80px 0;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.about-text {
+    max-width: 550px;
+}
+
+.about-text h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #052c65;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.about-text p {
+    color: #333;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 15px;
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+.about-box {
+    padding: 20px;
+    border-left: 4px solid  #002f6c;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+.about-box h4 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #052c65;
+}
+
+.about-box p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Image Section */
+.about-images {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    animation: fadeInRight 1.5s ease-in-out;
+}
+
+.about-images img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.about-images img:hover {
+    transform: scale(1.05);
+}
+
+/* Initially hide elements */
+.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-in-out;
+}
+
+/* Animate elements when they become visible */
+.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Specific Animations */
+.about-text.animate {
+    animation: fadeInLeft 1s ease-in-out;
+}
+
+.about-box.animate {
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+.about-images img.animate {
+    animation: fadeInRight 1.5s ease-in-out;
+}
+
+/* Keyframes */
+@keyframes fadeInLeft {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-images {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .about-text {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-images {
+        flex-direction: column;
+    }
+
+    .about-text h2 {
+        font-size: 28px;
+    }
+
+    .about-text p {
+        font-size: 16px;
+    }
+}
+
+
+/* team code*/
+ /* General Styles */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f8ff;
+}
+
+/* Team Section */
+.team-section {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.team-section h2 {
+    color: #052c65;
+    margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 28px;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+/* Team Container (Grid Layout) */
+.team-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+ /* Team Card */
+.team-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateY(30px);
+    position: relative;
+    border: 3px solid transparent;
+}
+
+/* Border Animation on Hover */
+.team-card::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 15px;
+    z-index: -1;
+    background: linear-gradient(135deg, #0c2856, #7cb0e7, #0c2856); /* Light Blue Gradient */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Show Border on Hover */
+.team-card:hover::before {
+    opacity: 1;
+}
+
+/* Hover Effect - Slight Lift */
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Reveal Animation */
+.team-card.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s ease-in-out;
+}
+
+/* Hover Effect */
+.team-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Doctor Images */
+.team-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Image Hover Effect */
+.team-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .team-container {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-card {
+        width: 80%;
+        max-width: 300px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* commitmenttcode */
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    background: #f4f8ff;
+}
+
+/* Commitment Section */
+.commitment-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #052c65;
+    padding: 50px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+/* Image Styling */
+.commitment-image {
+    width: 50%;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+.commitment-image img {
+    width: 100%;
+    border-radius: 10px;
+    filter: brightness(90%);
+    transition: filter 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+.commitment-image img:hover {
+    filter: brightness(110%);
+    transform: scale(1.05);
+}
+
+/* Content Styling */
+.commitment-content {
+    width: 50%;
+    padding: 30px;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+.commitment-content h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.commitment-content h3 {
+    font-size: 32px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+.commitment-content ul {
+    list-style: none;
+    padding-top: 10px;
+}
+.commitment-content ul li {
+    font-size: 18px;
+    margin: 10px 0;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+.commitment-content ul li::before {
+    content: '\2714';
+    color: #ffcc00;
+    margin-right: 10px;
+}
+
+/* Reveal Animations */
+.commitment-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.commitment-image.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+.commitment-content.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+.commitment-content ul li.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .commitment-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    .commitment-image, .commitment-content {
+        width: 100%;
+    }
+}
+
+
+
+
+/* <!-- clientreview --> */
+
+ /* General Styles */
+ body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* * Review Section - Unique Background */ */
+.review-section {
+    position: relative;
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to bottom, #eaf2ff 0%, #cfe0ff 100%);
+    overflow: hidden;
+}
+
+
+/* Adding a Wave Effect */
+.review-section::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color:lightblue;
+    /* background: url('public/r.jpeg') no-repeat center bottom/cover; */
+    opacity: 0.2;
+}
+
+.review-title {
+    position: relative;
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Review Cards - Keeping a Clean, Professional Look */
+.review-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+
+/* Apply animation when in viewport */
+.review-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover Effect */
+ .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+/* Review Text */
+.review-text {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Review Author */
+.review-author {
+    font-weight: bold;
+    margin-top: 5px;
+    color: #002f6c;
+}
+
+/* Profile Image */
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Quote Icon */
+.quote-icon {
+    font-size: 1.5rem;
+    color: #002f6c;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* On Click - Border Animation */
+.review-card.active {
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    animation: borderGlow 1s infinite alternate;
+}
+
+/* Border Animation */
+@keyframes borderGlow {
+    from {
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .review-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+/* Responsive Wave Effect */
+@media (max-width: 768px) {
+    .review-section::before {
+        height: 50px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<!-- About Page -->
+<% aboutus.forEach((about, index) => { %>  <!-- Fix variable name -->
+<section class="aboutus-section" style="background-image: url('/admin_assets/<%= about.img %>');">
+    <div class="aboutus-overlay"></div>
+    <div class="aboutus-content">
+        <h2 class="animated-text">
+            <span style="--i:1">A</span><span style="--i:2">b</span><span style="--i:3">o</span><span style="--i:4">u</span><span style="--i:5">t</span> 
+            <span style="--i:6">U</span><span style="--i:7">s</span>
+        </h2>
+        <p><%= about.info %></p>  
+    </div>
+</section>
+<% }); %>
+
+
+<!-- abouinfo -->
+<section class="about-section container">
+    <div class="row about-content">
+        <!-- Images -->
+        <div class="col-lg-5 about-images">
+            <% about.forEach((about, index) => { %>  <!-- Fix variable name -->
+            <img src="/admin_assets/<%= about.paimg1 %>" alt="Robot Doctor">
+            <img src="/admin_assets/<%= about.drimg2 %>" alt="Smiling Doctor">
+        </div>
+
+        <!-- Text Content -->
+        <div class="col-lg-7 about-text">
+            <span class="badge bg-primary text-light px-3 py-2">ABOUT US</span>
+            <h2><%= about.title1 %></h2>
+            <p><%= about.information %></p>
+
+            <div class="about-box">
+                <h4><%= about.title2 %></h4>
+                <p><%= about.information2 %></p>
+            </div>
+
+            <div class="about-box">
+                <h4><%= about.title3 %></h4>
+                <p><%= about.information3 %></p>
+            </div>
+        </div>
+    </div>
+</section>
+<% }); %>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const observerOptions = {
+            root: null, // Observes viewport
+            rootMargin: "0px",
+            threshold: 0.2 // Activates when 20% is visible
+        };
+    
+        const revealOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate");
+                }
+            });
+        };
+    
+        const observer = new IntersectionObserver(revealOnScroll, observerOptions);
+    
+        // Select all elements that need animation
+        document.querySelectorAll(".about-text, .about-box, .about-images img").forEach(element => {
+            element.classList.add("hidden"); // Initially hidden
+            observer.observe(element);
+        });
+    });
+    </script>
+
+
+<!-- teamcode -->
+<section class="team-section">
+    <h2>Our Specialist Doctors</h2>
+    <div class="team-container">
+        <% specialist.forEach((specialist, index) => { %>  <!-- Fix variable name -->
+        <div class="team-card">
+            <img src="/admin_assets/<%= specialist.photo%>" alt="Dr. Santhosh Gite">
+            <h3><%-specialist.name%></h3>
+            <p><%-specialist.specialty%></p>
+        </div>
+        <% }); %>
+
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: 0.2 });
+    
+        document.querySelectorAll(".team-card").forEach(card => {
+            observer.observe(card);
+        });
+    });
+    </script>
+
+
+
+<!-- commitment -->
+<div class="commitment-section">
+    <% commitment.forEach((commitment, index) => { %>  <!-- Fix variable name -->
+    <div class="commitment-image">
+        <img src="/admin_assets/<%= commitment.photo%>" alt="Hospital Reception">
+    </div>
+    <div class="commitment-content">
+        <h2 style="margin-left:50px;"><%-commitment.heading%></h2>
+        <h3 style="margin-left:50px; font-weight: bold;"><%-commitment.subheading%></h3>
+        <ul>
+            <li><%-commitment.commitment1%></li>
+            <li><%-commitment.commitment2%></li>
+            <li><%-commitment.commitment3%></li>
+            <li><%-commitment.commitment4%></li>
+        </ul>
+    </div>
+    <% }); %>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll(".commitment-section, .commitment-image, .commitment-content, .commitment-content ul li").forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
+
+
+
+
+ <!-- clientreview -->
+ <h2 class="review-title">Client Reviews</h2>
+
+ <div class="review-section">
+      <div class="container">
+         <div class="row">
+            <% reviews.forEach((reviews, index) => { %>  <!-- Fix variable name -->
+             <div class="col-12 col-md-4 mb-4" data-aos="fade-up">
+                  <div class="review-card">
+                     <span class="quote-icon">&#8220;</span>
+                     <div>
+                         <p class="review-text"><%-reviews.client_review %></p>
+                         <p class="review-author">
+                             <img src="/admin_assets/<%= reviews.client_photo%>" alt="User" class="profile-img"> <%-reviews.client_name %>
+                         </p>
+                     </div>
+                 </div>
+             </div>
+             <% }); %>
+
+              
+
+         </div>
+     </div>
+ </div>
+ 
+
+ <script>
+     document.addEventListener("DOMContentLoaded", function () {
+         const observer = new IntersectionObserver(entries => {
+             entries.forEach(entry => {
+                 if (entry.isIntersecting) {
+                     entry.target.classList.add("show");
+                 }
+             });
+         }, { threshold: 0.2 });
+ 
+         document.querySelectorAll(".review-card").forEach(el => {
+             observer.observe(el);
+         });
+     });
+ </script>
+
+ <script>
+     document.querySelectorAll(".review-card").forEach((card) => {
+ card.addEventListener("click", function () {
+     document.querySelectorAll(".review-card").forEach((c) => c.classList.remove("active"));
+     this.classList.add("active");
+ });
+});
+
+ </script>
+    
+    
+    
+
+
+<%- include("footer.ejs") %>
+
+
+
+    
+    
+ 
