@@ -8,7 +8,6 @@ var user_routes = require("./routes/user");
 
 var app = express();
 app.use(bodyparser.urlencoded({extended:true}));
-// app.use(express.urlencoded({ extended: true })); 
 app.use(upload());
 app.use(express.static("public"));
 

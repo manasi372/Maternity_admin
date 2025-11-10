@@ -1,348 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-<meta name="author" content="AdminKit">
-<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cake Shop Admin Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --main-orange: #f08632;
+      --dark-bg: #111;
+    }
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="shortcut icon" href="/admin_assets/img/icons/icon-48x48.png" />
+    .sidebar-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      color: #ccc;
+      transition: all 0.3s ease;
+    }
 
-<link rel="canonical" href="https://demo-basic.adminkit.io/" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    .sidebar-link:hover {
+      background-color: var(--main-orange);
+      color: white;
+    }
 
+    .sidebar-link.active {
+      background-color: var(--main-orange);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(240, 134, 50, 0.5);
+    }
 
-<title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+    /* Make sure main content fills the screen */
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
 
-<link href="/admin_assets/css/app.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    main {
+      min-height: 100vh;
+    }
+  </style>
 </head>
 
-<body>
-<div class="wrapper">
-<nav id="sidebar" class="sidebar js-sidebar">
-<div class="sidebar-content js-simplebar">
-<a class="sidebar-brand" href="index.html">
-<span class="align-middle">AdminKit</span>
-</a>
+<!-- Navbar -->
+<header class="sticky top-0 z-50 bg-white border-b shadow-sm flex justify-between items-center px-6 py-3 mb-6">
+  <!-- Left: Logo Image -->
+  <div class="flex items-center gap-2">
+    <img src="http://localhost:3000/img/logo.png" alt="Logo" class="h-10 w-auto object-contain" />
+    <span class="text-lg font-semibold text-[var(--main-orange)] hidden sm:inline">Admin Panel</span>
+  </div>
 
-<ul class="sidebar-nav">
-<li class="sidebar-header">
-Pages
-</li>
+  <!-- Right: Search + Profile -->
+  <div class="flex items-center space-x-4">
+    <input type="text" placeholder="Search..." class="hidden sm:block px-4 py-2 rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--main-orange)]" />
+    
+    <div class="relative group cursor-pointer">
+      <div class="w-10 h-10 bg-[var(--main-orange)] text-white rounded-full flex items-center justify-center font-semibold text-lg">
+        A
+      </div>
+      <div class="absolute right-0 mt-2 w-40 bg-white text-gray-800 rounded-lg shadow-lg p-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-300">
+        <p class="px-2 py-1 hover:bg-gray-100 rounded">Profile</p>
+        <p class="px-2 py-1 hover:bg-gray-100 rounded">Settings</p>
+        <p class="px-2 py-1 hover:bg-gray-100 rounded">Logout</p>
+      </div>
+    </div>
+  </div>
+</header>
 
-<li class="sidebar-item active">
-<a class="sidebar-link" href="/admin/index">
-<i class="align-middle" data-feather="grid"></i> <span class="align-middle">Dashboard</span>
-</a>
-</li>
+<body class="bg-gray-100 text-gray-800 font-sans h-full">
 
-<li class="sidebar-item">
-<a class="sidebar-link" href="/admin/profile">
-<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-</a>
-</li>
+  <div class="flex h-full">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[var(--dark-bg)] text-white shadow-lg">
+      <div class="text-center text-2xl font-bold py-6 border-b border-gray-700">
+        🎂 Admin Panel
+      </div>
+      <nav class="p-4 space-y-2 text-lg" id="sidebar-links">
+        <a href="#" class="sidebar-link active">Dashboard</a>
+
+        <!-- Sidebar Item - Home with Submenu -->
+        <div>
+          <button onclick="document.getElementById('homeSubmenu').classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-90')" class="w-full sidebar-link flex justify-between items-center text-left text-white">
+            <span class="flex items-center gap-2">
+              <i data-feather="home"></i> Home
+            </span>
+            <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <ul id="homeSubmenu" class="hidden ml-4 mt-2 space-y-1">
+            <li><a href="/admin/home_slider" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--main-orange)] hover:text-white rounded">📸 Add Slider</a></li>
+            <li><a href="/admin/about" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--main-orange)] hover:text-white rounded">🧾 About Us</a></li>
+            <li><a href="/admin/card" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--main-orange)] hover:text-white rounded">🃏 Cards</a></li>
+            <li><a href="/admin/doctor" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--main-orange)] hover:text-white rounded">👨‍⚕️ Doctor</a></li>
+            <li><a href="/admin/countdown" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--main-orange)] hover:text-white rounded">⏳ Countdown</a></li>
+            <li><a href="/admin/contactform" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--main-orange)] hover:text-white rounded">📩 Contact Form</a></li>
+            <li><a href="/admin/youtube" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--main-orange)] hover:text-white rounded">🎥 YouTube Video</a></li>
+          </ul>
+        </div>
+
+        <a href="#" class="sidebar-link">Orders</a>
+        <a href="#" class="sidebar-link">Categories</a>
+        <a href="#" class="sidebar-link">Logout</a>
+      </nav>
+    </aside>
  
-<li class="sidebar-item collapse-menu">  
-    <a class="sidebar-link active" onclick="sliderMenu.classList.toggle('show');"  role="button">
-        <i class="align-middle" data-feather="home"></i> <span class="align-middle">Home</span>
-    </a>
-    <ul class="collapse list-unstyled ms-3" id="sliderMenu">
-        <li><a class="sidebar-link" href="/admin/slider">Add Slider</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/about">About Us</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/card">Cards</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/doctor">Doctor</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/countdown">Countdown</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/contactform">Contact Form</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/youtube">You Tube Vedio</a></li>
-     </ul>
-</li>
+  
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Topbar -->
+      <div class="flex justify-between items-center mb-6">
+         <p class="text-sm text-gray-600">Welcome, Admin 👩‍🍳</p>
+      </div>
+
+      <!-- Dashboard Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="bg-white p-4 rounded-xl shadow border-l-4 border-[var(--main-orange)] hover:scale-105 transition">
+          <h2 class="text-sm text-gray-500">Total Cakes</h2>
+          <p class="text-2xl font-bold text-[var(--main-orange)]">132</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border-l-4 border-[var(--main-orange)] hover:scale-105 transition">
+          <h2 class="text-sm text-gray-500">Orders Today</h2>
+          <p class="text-2xl font-bold text-[var(--main-orange)]">24</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border-l-4 border-[var(--main-orange)] hover:scale-105 transition">
+          <h2 class="text-sm text-gray-500">Revenue</h2>
+          <p class="text-2xl font-bold text-[var(--main-orange)]">$560</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow border-l-4 border-[var(--main-orange)] hover:scale-105 transition">
+          <h2 class="text-sm text-gray-500">Pending Orders</h2>
+          <p class="text-2xl font-bold text-[var(--main-orange)]">7</p>
+        </div>
+      </div>
+
+      <!-- Product Management Section -->
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-semibold">Manage Cakes</h2>
+          <button class="bg-[var(--main-orange)] text-white px-4 py-2 rounded hover:bg-orange-600 transition">+ Add Cake</button>
+        </div>
+
+        <!-- Search -->
+        <div class="mb-4">
+          <input type="text" id="searchInput" placeholder="Search Cakes..." class="w-full px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--main-orange)]" />
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto bg-white shadow rounded-lg">
+          <table class="min-w-full text-sm">
+            <thead class="bg-[var(--main-orange)] text-white">
+              <tr>
+                <th class="px-6 py-3 text-left">Image</th>
+                <th class="px-6 py-3 text-left">Cake Name</th>
+                <th class="px-6 py-3 text-left">Price</th>
+                <th class="px-6 py-3 text-left">Category</th>
+                <th class="px-6 py-3 text-left">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productTable">
+              <tr class="border-b hover:bg-gray-50">
+                <td class="px-6 py-3">
+                  <img src="https://via.placeholder.com/50" class="w-12 h-12 rounded-full object-cover" />
+                </td>
+                <td class="px-6 py-3">Chocolate Dream</td>
+                <td class="px-6 py-3">$22</td>
+                <td class="px-6 py-3">Birthday</td>
+                <td class="px-6 py-3 space-x-2">
+                  <button class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700">Edit</button>
+                  <button class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-gray-50">
+                <td class="px-6 py-3">
+                  <img src="https://via.placeholder.com/50" class="w-12 h-12 rounded-full object-cover" />
+                </td>
+                <td class="px-6 py-3">Strawberry Bliss</td>
+                <td class="px-6 py-3">$18</td>
+                <td class="px-6 py-3">Wedding</td>
+                <td class="px-6 py-3 space-x-2">
+                  <button class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700">Edit</button>
+                  <button class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
 
-<li class="sidebar-item collapse-menu">  
-    <a class="sidebar-link active" onclick="sliderMenu1.classList.toggle('show');"  role="button">
-        <i class="align-middle" data-feather="info"></i> <span class="align-middle">About</span>
-    </a>
-    <ul class="collapse list-unstyled ms-3" id="sliderMenu1">
-        <li><a class="sidebar-link" href="/admin/aboutslider">Add Slider</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/about">About Us</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/vision">Vision&Missiom</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/specialist">Doctor</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/commitment">Commitment</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/client">Client Review</a></li>
-     
-      </ul>
-</li>
+   
+  <!-- Footer -->
+<footer class="bg-gradient-to-r from-[var(--dark-bg)] via-black to-[var(--dark-bg)] text-gray-400 text-sm text-center py-4 border-t border-gray-700 mt-10">
+  <p>&copy; 2025 Udayanraje Cake Admin Panel | Crafted with ❤️ for Excellence</p>
+</footer>
+  </div>
 
+<script>
+  feather.replace();
+</script>
+<!-- Sidebar Active Highlight Script -->
+<script>
+  const links = document.querySelectorAll("#sidebar-links .sidebar-link");
 
-<li class="sidebar-item collapse-menu">  
-    <a class="sidebar-link active" onclick="sliderMenu2.classList.toggle('show');"  role="button">
-        <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Services</span>
-    </a>
-    <ul class="collapse list-unstyled ms-3" id="sliderMenu2">
-        <li><a class="sidebar-link" href="/admin/serviceslider">Add Slider</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/facilities">Facilities/Services</a></li>
-     
-      </ul>
-</li>
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      links.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
+</script>
 
-<li class="sidebar-item collapse-menu">  
-    <a class="sidebar-link active" onclick="sliderMenu3.classList.toggle('show');"  role="button">
-        <i class="align-middle" data-feather="image"></i> <span class="align-middle">Gallery</span>
-    </a>
-    <ul class="collapse list-unstyled ms-3" id="sliderMenu3">
-        <li><a class="sidebar-link" href="/admin/galleryslider">Add Gallery Slider</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/galleryimage">Add Gallery Image</a></li>
-     
-      </ul>
-</li>
+<!-- Search Filter Script -->
+<script>
+  document.getElementById("searchInput").addEventListener("input", function () {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#productTable tr");
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      row.style.display = text.includes(filter) ? "" : "none";
+    });
+  });
+</script>
 
- 
-<li class="sidebar-item collapse-menu">  
-    <a class="sidebar-link active" onclick="sliderMenu4.classList.toggle('show');"  role="button">
-        <i class="align-middle" data-feather="heart"></i> <span class="align-middle">Insurence</span>
-    </a>
-    <ul class="collapse list-unstyled ms-3" id="sliderMenu4">
-        <li><a class="sidebar-link" href="/admin/insurenceslider">Add Insurence Slider</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/insurenceplan">Add Insurence Plan</a></li>
-     
-      </ul>
-</li>
-
- 
-<li class="sidebar-item collapse-menu">  
-    <a class="sidebar-link active" onclick="sliderMenu5.classList.toggle('show');"  role="button">
-        <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Blog</span>
-    </a>
-    <ul class="collapse list-unstyled ms-3" id="sliderMenu5">
-        <li><a class="sidebar-link" href="/admin/blogslider">Add Blog Slider</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/addblog">Add Blog</a></li>
-     
-      </ul>
-</li>
-
-<li class="sidebar-item collapse-menu">  
-    <a class="sidebar-link active" onclick="sliderMenu6.classList.toggle('show');"  role="button">
-        <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Contact</span>
-    </a>
-    <ul class="collapse list-unstyled ms-3" id="sliderMenu6">
-        <li><a class="sidebar-link" href="/admin/contactslider">Add Contact Slider</a></li>
-     
-        <li><a class="sidebar-link" href="/admin/contactcards">Add Contact Cards</a></li>
-
-		<li><a class="sidebar-link" href="/admin/contactforms">Add Contact Form</a></li>
-
-     
-      </ul>
-</li>
-
-
-
-<li class="sidebar-item collapse-menu">  
-    <a class="sidebar-link active" onclick="sliderMenu7.classList.toggle('show');"  role="button">
-        <i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Appointment</span>
-    </a>
-    <ul class="collapse list-unstyled ms-3" id="sliderMenu7">
-        <li><a class="sidebar-link" href="/admin/appointment">Add Appointment Form</a></li>
-
-     
-      </ul>
-</li>
-
- 
-<div class="sidebar-cta">
-<div class="sidebar-cta-content">
-<strong class="d-inline-block mb-2">Upgrade to Pro</strong>
-<div class="mb-3 text-sm">
-Are you looking for more components? Check out our premium version.
-</div>
-<div class="d-grid">
-<a href="upgrade-to-pro.html" class="btn btn-primary">Upgrade to Pro</a>
-</div>
-</div>
-</div>
-</div>
-</nav>
-<div class="main">
-<nav class="navbar navbar-expand navbar-light navbar-bg">
-<a class="sidebar-toggle js-sidebar-toggle">
-<i class="hamburger align-self-center"></i>
-</a>
-
-<div class="navbar-collapse collapse">
-<ul class="navbar-nav navbar-align">
-<li class="nav-item dropdown">
-<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-<div class="position-relative">
-<i class="align-middle" data-feather="bell"></i>
-<span class="indicator">4</span>
-</div>
-</a>
-<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
-<div class="dropdown-menu-header">
-4 New Notifications
-</div>
-<div class="list-group">
-<a href="#" class="list-group-item">
-	<div class="row g-0 align-items-center">
-		<div class="col-2">
-			<i class="text-danger" data-feather="alert-circle"></i>
-		</div>
-		<div class="col-10">
-			<div class="text-dark">Update completed</div>
-			<div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
-			<div class="text-muted small mt-1">30m ago</div>
-		</div>
-	</div>
-</a>
-<a href="#" class="list-group-item">
-	<div class="row g-0 align-items-center">
-		<div class="col-2">
-			<i class="text-warning" data-feather="bell"></i>
-		</div>
-		<div class="col-10">
-			<div class="text-dark">Lorem ipsum</div>
-			<div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-			<div class="text-muted small mt-1">2h ago</div>
-		</div>
-	</div>
-</a>
-<a href="#" class="list-group-item">
-	<div class="row g-0 align-items-center">
-		<div class="col-2">
-			<i class="text-primary" data-feather="home"></i>
-		</div>
-		<div class="col-10">
-			<div class="text-dark">Login from 192.186.1.8</div>
-			<div class="text-muted small mt-1">5h ago</div>
-		</div>
-	</div>
-</a>
-<a href="#" class="list-group-item">
-	<div class="row g-0 align-items-center">
-		<div class="col-2">
-			<i class="text-success" data-feather="user-plus"></i>
-		</div>
-		<div class="col-10">
-			<div class="text-dark">New connection</div>
-			<div class="text-muted small mt-1">Christina accepted your request.</div>
-			<div class="text-muted small mt-1">14h ago</div>
-		</div>
-	</div>
-</a>
-</div>
-<div class="dropdown-menu-footer">
-<a href="#" class="text-muted">Show all notifications</a>
-</div>
-</div>
-</li>
-<li class="nav-item dropdown">
-<a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
-<div class="position-relative">
-<i class="align-middle" data-feather="message-square"></i>
-</div>
-</a>
-<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
-<div class="dropdown-menu-header">
-<div class="position-relative">
-	4 New Messages
-</div>
-</div>
-<div class="list-group">
-<a href="#" class="list-group-item">
-	<div class="row g-0 align-items-center">
-		<div class="col-2">
-			<img src="/admin_assets/img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
-		</div>
-		<div class="col-10 ps-2">
-			<div class="text-dark">Vanessa Tucker</div>
-			<div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
-			<div class="text-muted small mt-1">15m ago</div>
-		</div>
-	</div>
-</a>
-<a href="#" class="list-group-item">
-	<div class="row g-0 align-items-center">
-		<div class="col-2">
-			<img src="/admin_assets/img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle" alt="William Harris">
-		</div>
-		<div class="col-10 ps-2">
-			<div class="text-dark">William Harris</div>
-			<div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.</div>
-			<div class="text-muted small mt-1">2h ago</div>
-		</div>
-	</div>
-</a>
-<a href="#" class="list-group-item">
-	<div class="row g-0 align-items-center">
-		<div class="col-2">
-			<img src="/admin_assets/img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle" alt="Christina Mason">
-		</div>
-		<div class="col-10 ps-2">
-			<div class="text-dark">Christina Mason</div>
-			<div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
-			<div class="text-muted small mt-1">4h ago</div>
-		</div>
-	</div>
-</a>
-<a href="#" class="list-group-item">
-	<div class="row g-0 align-items-center">
-		<div class="col-2">
-			<img src="/admin_assets/img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
-		</div>
-		<div class="col-10 ps-2">
-			<div class="text-dark">Sharon Lessman</div>
-			<div class="text-muted small mt-1">Aenean tellus metus, bibendum sed, posuere ac, mattis non.</div>
-			<div class="text-muted small mt-1">5h ago</div>
-		</div>
-	</div>
-</a>
-</div>
-<div class="dropdown-menu-footer">
-<a href="#" class="text-muted">Show all messages</a>
-</div>
-</div>
-</li>
-<li class="nav-item dropdown">
-<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-<i class="align-middle" data-feather="settings"></i>
-</a>
-
-<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-<img src="/admin_assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
-</a>
-<div class="dropdown-menu dropdown-menu-end">
-<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Log out</a>
-</div>
-</li>
-</ul>
-</div>
-</nav>
-<main class="content">
-<div class="container-fluid p-0">
+</body>
+</html>
